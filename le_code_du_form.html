@@ -1,0 +1,52 @@
+<!-- Formulaire dynamique -->
+<center>
+    <h1>Formulaire</h1>
+    <form method="post" action="">
+      <p>Votre nom <input type="text" name="nom" required></p>
+      <p>Votre prénom <input type="text" name="prenom" required></p>
+      
+      <p>
+        <input type="radio" name="titre" value="M." required>M.
+        <input type="radio" name="titre" value="Mme">Mme
+        <input type="radio" name="titre" value="Mlle">Mlle
+      </p>
+      
+      <p>
+        Année de naissance 
+        <select name="annee" required>
+          <option value="">Choisissez</option>
+          <option>2001</option>
+          <option>2002</option>
+          <option>2003</option>
+        </select>
+      </p>
+
+      <p><input type="submit" value="Envoyer"></p>
+    </form>
+  </center>
+
+  <?php
+    // Traitement des données du formulaire
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        // Sécurisation avec htmlspecialchars
+        $nom = htmlspecialchars($_POST["nom"]);
+        $prenom = htmlspecialchars($_POST["prenom"]);
+        $titre = htmlspecialchars($_POST["titre"]);
+        $annee = htmlspecialchars($_POST["annee"]);
+
+        echo "<hr>";
+        echo "<h3>Informations reçues :</h3>";
+        echo "<p><strong>Titre :</strong> $titre</p>";
+        echo "<p><strong>Nom :</strong> $nom</p>";
+        echo "<p><strong>Prénom :</strong> $prenom</p>";
+        echo "<p><strong>Année de naissance :</strong> $annee</p>";
+
+        // Affichage dans la console
+        echo "<script>
+            console.log('Titre : " . addslashes($titre) . "');
+            console.log('Nom : " . addslashes($nom) . "');
+            console.log('Prénom : " . addslashes($prenom) . "');
+            console.log('Année : " . addslashes($annee) . "');
+        </script>";
+    }
+  ?>
